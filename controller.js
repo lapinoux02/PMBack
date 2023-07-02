@@ -3,6 +3,7 @@ const admZip = require('adm-zip')
 const conf = require('./conf.json')
 
 const folder = conf.folder
+let inc = 0 // Avoids names clash
 
 exports.addFile = function(req, res) {
 	req.files.forEach((file => {
@@ -13,7 +14,7 @@ exports.addFile = function(req, res) {
 		// Gestion du fichier en fonction de son extension
 		if (extension !== 'zip') {
 			// Si on n'a pas un zip, on sauvegarde tel quel
-			const filePath = `${folder}/${file.originalname}`
+			const filePath = `${folder}/${inc++}_${file.originalname}`
 			fs.copyFileSync(`${file.path}`, filePath, fs.constants.COPYFILE_EXCL)
 			fs.unlinkSync(`${file.path}`)
 		} else {
