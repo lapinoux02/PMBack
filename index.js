@@ -16,4 +16,4 @@ routes(app)
 
 app.listen(port)
 
-console.log('Photoss server started on: ' + port)
+console.log('PMBack server started on: ' + port)
